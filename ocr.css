@@ -1,0 +1,35 @@
+.intro-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+#screenshot-import { border-color: #ccd5fc; color: #4e65c9; font-weight: bold; }
+button:disabled { cursor: default; opacity: .55; }
+[hidden] { display: none !important; }
+dialog { max-height: 90dvh; overflow-y: auto; }
+#ocr-modal { width: min(680px, 94vw); }
+.ocr-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.ocr-heading h2 { margin: 0; font-size: 22px; }
+.ocr-close { border: 0; background: none; color: #7b8596; padding: 8px; font-size: 23px; }
+.ocr-help { color: #727e90; font-size: 13px; line-height: 1.8; }
+.ocr-privacy { padding: 12px 15px; background: #edf5f0; color: #40765b; border-radius: 8px; font-size: 12px; line-height: 1.7; }
+.ocr-drop { margin: 20px 0; padding: 24px; border: 2px dashed #d7dff4; border-radius: 12px; text-align: center; background: #f8faff; }
+.ocr-drop.dragging { border-color: #546ddd; background: #edf1ff; }
+.ocr-drop strong { display: block; font-size: 14px; margin-bottom: 12px; }
+.ocr-drop input { max-width: 100%; font-size: 12px; }
+.ocr-drop input::file-selector-button { border: 1px solid #d2daef; border-radius: 6px; background: white; color: #4e65c9; padding: 10px; cursor: pointer; margin-right: 8px; }
+.ocr-drop p { font-size: 11px; color: #8490a0; margin-bottom: 0; }
+.ocr-preview { width: 100%; max-height: 250px; object-fit: contain; border: 1px solid #e5e8ef; border-radius: 8px; background: #f7f8fa; }
+.ocr-read { margin-top: 15px; }
+#ocr-status { font-size: 13px; line-height: 1.8; min-height: 24px; color: #536acb; }
+#ocr-status.error { color: #b44249; }
+#ocr-progress { width: 100%; accent-color: #546ddd; height: 8px; }
+#ocr-result label { display: block; font-weight: bold; font-size: 14px; margin-top: 22px; }
+#ocr-text { width: 100%; min-height: 200px; border: 1px solid #dce1eb; padding: 12px; border-radius: 8px; font: inherit; font-size: 14px; line-height: 1.8; }
+.ocr-note { margin: 0 0 15px; font-size: 12px; color: #7c8799; line-height: 1.8; }
+.ocr-actions { position: sticky; bottom: -30px; background: white; padding: 15px 0; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #eef0f5; }
+@media (max-width: 760px) {
+  .intro { align-items: flex-start; flex-direction: column; }
+  .intro-actions { margin-top: 10px; width: 100%; }
+  .intro-actions button { flex: 1; font-size: 12px; }
+  #ocr-modal { padding: 20px; }
+  .ocr-heading h2 { font-size: 19px; }
+  .ocr-drop { padding: 16px; }
+  .ocr-actions { bottom: -20px; }
+}
