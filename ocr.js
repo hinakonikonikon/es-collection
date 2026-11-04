@@ -10,6 +10,7 @@
   let rejectRun = null;
   let runTimer = null;
   let selection = 0;
+  let importTarget = null;
 
   function status(text, error = false) {
     get('ocr-status').textContent = text;
@@ -147,11 +148,20 @@
     }
   }
 
-  get('screenshot-import').addEventListener('click', () => {
+  function openImport(targetId = null) {
+    if (dialog.open) return;
+    importTarget = targetId;
+    get('ocr-title').textContent = targetId ? 'スクショから回答を追加' : 'スクショからESを追加';
+    get('ocr-use').textContent = targetId ? 'この設問の回答欄に追加' : 'ESの入力画面へ';
+    get('ocr-note').textContent = targetId
+      ? 'この設問の回答欄に追加します。入力済みの文章は残ります。画像は保存されません。'
+      : 'この文章を最初の設問の回答欄に入れます。次の画面で企業名・設問を入力してください。「設問を追加」で他の設問もまとめられます。画像は保存されません。';
     status('');
     dialog.showModal();
     controls();
-  });
+  }
+  get('screenshot-import').addEventListener('click', () => openImport());
+  document.addEventListener('es:scan', event => openImport(event.detail.targetId));
   get('ocr-file').addEventListener('change', event => selectImage(event.target.files[0]));
   get('ocr-read').addEventListener('click', recognize);
   get('ocr-text').addEventListener('input', controls);
@@ -164,13 +174,15 @@
     get('ocr-file').value = '';
     get('ocr-text').value = '';
     get('ocr-result').hidden = true;
+    importTarget = null;
     controls();
   });
   get('ocr-use').addEventListener('click', () => {
     const text = get('ocr-text').value.trim();
     if (busy || !text) return;
+    const targetId = importTarget;
     dialog.close();
-    document.dispatchEvent(new CustomEvent('es:import', { detail: { answer: text } }));
+    document.dispatchEvent(new CustomEvent('es:import', { detail: { answer: text, targetId } }));
   });
   const drop = get('ocr-drop');
   drop.addEventListener('dragover', event => {
